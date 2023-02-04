@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
-import { Button, Paper, TextField } from '@mui/material'
+import React, { useState } from 'react';
+import { Button, Paper, TextField } from '@mui/material';
 
 export default function Form({ addTodo }) {
-  const [text, setText] = useState('')
-  const [id, setId] = useState(0)
+  const [text, setText] = useState('');
+  const [id, setId] = useState(0);
 
   const createTodo = (text, id) => {
-    const todoObj = { text: text, id: id }
-    setId(id + 1)
-    addTodo(todoObj)
-    setText('')
-  }
+    const todoObj = { text: text, id: id, completed: false };
+    setId(id + 1);
+    addTodo(todoObj);
+    setText('');
+  };
 
   return (
     <Paper style={{ padding: '1em' }}>
@@ -28,5 +28,5 @@ export default function Form({ addTodo }) {
         </Button>
       </div>
     </Paper>
-  )
+  );
 }
