@@ -9,7 +9,9 @@ export default function Todo() {
 
   useEffect(() => {
     const localTodos = localStorage.getItem('todos');
-    setTodos(JSON.parse(localTodos));
+    if (localTodos) {
+      setTodos(JSON.parse(localTodos));
+    }
   }, []);
 
   const addTodo = (todo) => {
