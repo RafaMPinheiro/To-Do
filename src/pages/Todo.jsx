@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from '@mui/material';
 import List from '@mui/material/List';
 import TodoItem from '../components/TodoItem';
@@ -7,13 +7,20 @@ import Form from '../components/Form';
 export default function Todo() {
   const [todos, setTodos] = useState([]);
 
+  useEffect(() => {
+    const localTodos = localStorage.getItem('todos');
+    setTodos(JSON.parse(localTodos));
+  }, []);
+
   const addTodo = (todo) => {
     setTodos([...todos, todo]);
+    localStorage.setItem('todos', JSON.stringify([...todos, todo]));
   };
 
   const deleteTodo = (id) => {
     var filtered = todos.filter((todo) => todo.id != id);
     setTodos(filtered);
+    localStorage.setItem('todos', JSON.stringify(filtered));
   };
 
   const editTodo = (id, editedText) => {
@@ -25,6 +32,7 @@ export default function Todo() {
       }
     }
     setTodos(todosArray);
+    localStorage.setItem('todos', JSON.stringify(todosArray));
   };
 
   const completeTodo = (id) => {
@@ -36,6 +44,7 @@ export default function Todo() {
       }
     }
     setTodos(todosArray);
+    localStorage.setItem('todos', JSON.stringify(todosArray));
   };
 
   return (
